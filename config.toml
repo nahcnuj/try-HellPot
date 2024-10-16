@@ -1,0 +1,28 @@
+[deception]
+  server_name = "nginx"
+
+[http]
+  bind_addr = "0.0.0.0"
+  bind_port = "8080"
+  real_ip_header = "X-Real-IP"
+  uagent_string_blacklist = ["Cloudflare-Traffic-Manager"]
+  unix_socket_path = "/var/run/hellpot"
+  unix_socket_permissions = "0666"
+  use_unix_socket = false
+
+  [http.router]
+    catchall = false
+    makerobots = true
+    paths = ["wp-login.php", "wp-login"]
+
+[logger]
+  console_time_format = "3:04PM"
+  debug = true
+  docker_logging = true
+  nocolor = false
+  trace = false
+  use_date_filename = true
+
+[performance]
+  max_workers = 256
+  restrict_concurrency = false
